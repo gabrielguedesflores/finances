@@ -9,6 +9,7 @@
   <body>
     <div class="container" id="main">
 
+      <!-- Menu -->
       <div class="row">
         <div class="col s2">
           <!-- Sidenav -->
@@ -42,26 +43,31 @@
         </div>
       </div>
 
-      <div class="row">
+      <!-- Content -->
+      <div class="row" id="list">
         <div class="col s12">
-          <ul class="collapsible popout" data-collapsible="accordion">
-            <li style="text-shadow: solid green;">
-              <div class="collapsible-header">
-                <i class="material-icons">home</i>
-                Aluguel+
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">home</i>Aluguel+
+                <div class="col offset-s9"><i class="material-icons cyan-text text-darken-4">check_circle</i></div>
               </div>
+
               <div class="collapsible-body">
                 <span>R$ 1.561,66</span>
               </div>
             </li>
             <li>
-              <div class="collapsible-header"><i class="material-icons">lightbulb_outline</i>Luz</div>
+              <div class="collapsible-header"><i class="material-icons">lightbulb_outline</i>Luz
+                <div class="col offset-s9"><i class="material-icons cyan-text text-darken-4">check_circle</i></div>
+              </div>
+
               <div class="collapsible-body">
                 <span>R$ 160,58</span>
               </div>
             </li>
             <li>
               <div class="collapsible-header"><i class="material-icons">network_check</i>Internet</div>
+
               <div class="collapsible-body">
                 <span>R$ 104,99</span>
               </div>
@@ -70,8 +76,64 @@
         </div>
       </div>
 
+      <div class="row" id="grid" style="display: none">
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="/assets/images/grid/aluguel.jpeg">
+              <span class="card-title">Aluguel</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="/assets/images/grid/luz.jpg">
+              <span class="card-title">Luz</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            </div>
+          </div>
+        </div> 
+
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="/assets/images/grid/internet.jpg">
+              <span class="card-title">Internet</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            </div>
+          </div>
+        </div>    
+
+      </div>
+
+      <div id="footer" style="float: right;">
+
+        <div class="fixed-action-btn horizontal">
+          <a class="btn-floating btn-large red">
+            <i class="large material-icons">apps</i>
+          </a>
+          <ul>
+            <li><a class="btn-floating red" id="btnLayoutList"><i class="material-icons">format_list_bulleted</i></a></li>
+            <li><a class="btn-floating yellow darken-1" id="btnLayoutGrid"><i class="material-icons">view_module</i></a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
 
+    <!-- Loading... -->
     <div class="progress" style="display: none;">
       <div class="indeterminate"></div>
     </div>
