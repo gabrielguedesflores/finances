@@ -2,6 +2,7 @@ $(document).ready(function(){
   loading()
   binds()
   handler()
+  $('.modal').modal();
 });
 
 const loading = () => {
