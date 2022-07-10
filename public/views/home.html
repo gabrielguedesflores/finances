@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,40 +9,7 @@
     <div class="container" id="main">
 
       <!-- Menu -->
-      <div class="row">
-        <div class="col s2">
-          <!-- Sidenav -->
-          <ul id="slide-out" class="side-nav">
-            <li><div class="user-view">
-              <div class="background">
-                <img src="assets/images/capa.png">
-              </div>
-              <a href="#!user"><img class="circle" src="assets/images/perfil.jpg"></a>
-              <a href="#!name"><span class="white-text name">Gabriel Guedes</span></a>
-              <a href="#!email"><span class="white-text email">gabs@gmail.com</span></a>
-            </div></li>
-            <li><a href="#!"><i class="material-icons">person</i>Meu perfil</a></li>
-            <li><a href="#!"><i class="material-icons">burst_mode</i>Categorias</a></li>
-            <li><a href="#!"><i class="material-icons">attach_money</i>Meus Ganhos</a></li>
-            <li><a href="#!"><i class="material-icons">color_lens</i>Personalizar</a></li>
-            <li><div class="divider"></div></li>
-            <li><a href="#!" class=""><i class="material-icons">settings</i>Configurações</a></li>
-            <li><a href="#!" class="waves-effect"><i class="material-icons">input</i>Sair</a></li>
-          </ul>
-
-          <a href="#" data-activates="slide-out" class="btn-floating btn-large waves-effect waves-light red button-collapse">
-            <i class="medium material-icons">menu</i>
-          </a>
-        </div>
-        <div class="col s10">
-          <ul class="tabs">
-            <li class="tab col s3"><a href="#test1">Todas</a></li>
-            <li class="tab col s3"><a class="active" href="#test2">APTO</a></li>
-            <li class="tab col s3"><a href="#test3">Pessoais</a></li>
-            <li class="tab col s3"><a href="#test4">Streaming</a></li>
-          </ul>
-        </div>
-      </div>
+      <div class="row" id="menu"></div>
 
       <!-- Content -->
       <div class="row" id="list">
@@ -154,18 +120,7 @@
 
       </div>
 
-      <div id="footer" style="float: right;">
-
-        <div class="fixed-action-btn horizontal">
-          <a class="btn-floating btn-large red">
-            <i class="large material-icons">apps</i>
-          </a>
-          <ul>
-            <li><a class="btn-floating red" id="btnLayoutList"><i class="material-icons">format_list_bulleted</i></a></li>
-            <li><a class="btn-floating red darken-1" id="btnLayoutGrid"><i class="material-icons">view_module</i></a></li>
-          </ul>
-        </div>
-      </div>
+      <div id="footer" style="float: right;"></div>
 
     </div>
 
@@ -174,9 +129,12 @@
       <div class="indeterminate"></div>
     </div>
 
-    <!--Import jQuery before materialize.js-->
+    <!--Imports Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/assets/js/init/loading.js"></script>
+    <script type="text/javascript" src="/assets/js/init/menu.js"></script>
+    <script type="text/javascript" src="/assets/js/init/footer.js"></script>
     <script type="text/javascript" src="/assets/js/home.js"></script>
   </body>
 </html>
