@@ -9,17 +9,24 @@
     <div class="container" id="main">
 
       <!-- Menu -->
-      <div class="row" id="menu"></div>
+      <div id="menu" class="row" ></div>
 
       <!-- Content -->
-      <div class="row" id="list">
+      <div style="justify-content: flex-start;" class="centered">
+        <div class="chip" >
+          Julho
+        </div>
+      </div>
+      
+      <section id="list" class="row">
         <div class="col s12">
           <ul class="collapsible popout" data-collapsible="accordion">
 
             <li class="">
-              <div class="collapsible-header green accent-3">
+              <div class="collapsible-header">
                 <i class="material-icons">home</i>
                 Aluguel+
+                <div class="chip teal white-text col s3" style="text-align: center;">Paga</div>
               </div>
               <div class="collapsible-body">
                 <span>R$ 1.561,66</span>
@@ -28,8 +35,10 @@
             </li>
 
             <li>
-              <div class="collapsible-header"><i class="material-icons">lightbulb_outline</i>Luz
-                <div class="col offset-s9"></div>
+              <div class="collapsible-header">
+                <i class="material-icons">lightbulb_outline</i>
+                Luz
+                <div class="chip teal white-text col s3" style="text-align: center;">Paga</div>
               </div>
               <div class="collapsible-body">
                 <span>R$ 160,58</span>
@@ -38,7 +47,11 @@
             </li>
 
             <li>
-              <div class="collapsible-header red"><i class="material-icons">network_check</i>Internet</div>
+              <div class="collapsible-header">
+                <i class="material-icons">network_check</i>
+                Internet
+                <div class="chip black-text col s3" style="text-align: center;">Paga</div>
+              </div>
               <div class="collapsible-body">
                 <span>R$ 104,99</span>
                 <a href="#" style="float: right;"><i class="material-icons">create</i></a>
@@ -47,85 +60,51 @@
 
           </ul>
         </div>
-      </div>
+      </section>
 
-      <div class="row" id="grid" style="display: none">
-        <div class="col s12 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src="/assets/images/grid/aluguel.jpeg">
-              <span class="card-title">Aluguel</span>
-              <a class="btn-floating halfway-fab waves-effect waves-light red btn modal-trigger" href="#modal1"><i class="material-icons">create</i></a>
+      <section id="grid" class="row" style="display: none">
+        <div class="col s12 m3">
+          <div class="card grey lighten-5">
+            <div class="card-content black-text">
+              <span class="card-title">Aluguel+</span>
+              <p>R$ 1.561,66</p>
+              <div class="chip teal white-text" style="margin-top: 10px;">Paga</div>
             </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            <div class="card-action">
+              <a href="#" class="black-text">Detalhes</a>
             </div>
           </div>
         </div>
 
-        <div class="col s12 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src="/assets/images/grid/luz.jpg">
+        <div class="col s12 m3">
+          <div class="card grey lighten-5">
+            <div class="card-content black-text">              
               <span class="card-title">Luz</span>
-              <a class="btn-floating halfway-fab waves-effect waves-light red btn modal-trigger" href="#modal2"><i class="material-icons">create</i></a>
+              <p>R$ 160,58</p>
+              <div class="chip teal white-text" style="margin-top: 10px;">Paga</div>
             </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            <div class="card-action">
+              <a href="#" class="black-text">Detalhes</a>
             </div>
           </div>
-        </div> 
+        </div>
 
-        <div class="col s12 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src="/assets/images/grid/internet.jpg">
+        <div class="col s12 m3">
+          <div class="card grey lighten-5">
+            <div class="card-content black-text">             
               <span class="card-title">Internet</span>
-              <a class="btn-floating halfway-fab waves-effect waves-light red btn modal-trigger" href="#modal3"><i class="material-icons">create</i></a>
+              <p>R$ 104,99</p>
+              <div class="chip black-text" style="margin-top: 10px;">Paga</div>
             </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            <div class="card-action">
+              <a href="#" class="black-text">Detalhes</a>
             </div>
           </div>
-        </div>    
-
-        <!-- Modal Trigger -->
-        <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
-
-        <!-- Modal Structure -->
-        <div id="modal1" class="modal">
-          <div class="modal-content">
-            <h4>Aluguel</h4>
-            <p>R$ 1.561,66</p>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-          </div>
         </div>
 
-        <div id="modal2" class="modal">
-          <div class="modal-content">
-            <h4>Luz</h4>
-            <p>R$ 160,58</p>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-          </div>
-        </div>
+      </section>
 
-        <div id="modal3" class="modal">
-          <div class="modal-content">
-            <h4>Internet</h4>
-            <p>R$ 104,99</p>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="col s12 m8 offset-m2 l6 offset-l3 centered" style="margin: 50px 50px 50px 50px;">
+      <section class="col s12 m8 offset-m2 l6 offset-l3 centered" style="margin: 50px 50px 50px 50px;">
         <div class="card-panel grey lighten-5 z-depth-1">
           <div class="row valign-wrapper">
             <div class="col s12">
@@ -155,9 +134,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div id="footer" style="float: right;"></div>
+      <section id="footer" style="float: right;"></section>
 
     </div>
 
