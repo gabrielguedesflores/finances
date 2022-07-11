@@ -40,7 +40,6 @@ const menu = `
       <li class="tab col s3"><a href="">Todas</a></li>
       <li class="tab col s3"><a class="active" href="">APTO</a></li>
       <li class="tab col s3"><a href="">Pessoais</a></li>
-      <li class="tab col s3"><a href="">Streaming</a></li>
     </ul>
   </div>
   `

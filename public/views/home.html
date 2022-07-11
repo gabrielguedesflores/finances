@@ -3,6 +3,7 @@
   <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/assets/css/home.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body>
@@ -142,13 +143,15 @@
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
       <div class="modal-content">
-        <h4>Aluguel+</h4>
+        <h2>
+          <input id="title_modal" type="text" class="validate" value="Aluguel+">
+        </h2>
         <p>Descrição:</p>
+
         <table>
           <thead>
             <tr>
-                <th>Name</th>
-                <th>Item Name</th>
+                <th>#</th>
                 <th>Item Price</th>
             </tr>
           </thead>
@@ -156,26 +159,27 @@
           <tbody>
             <tr>
               <td>Aluguel</td>
-              <td>Eclair</td>
               <td>R$ 800,00</td>
             </tr>
             <tr>
               <td>Condomínio</td>
-              <td>Jellybean</td>
               <td>R$ 280,00</td>
             </tr>
             <tr>
               <td>IPTU</td>
-              <td>Lollipop</td>
               <td>R$ 90,00</td>
             </tr>
             <tr>
               <td>Seguro Fiança</td>
-              <td>Lollipop</td>
               <td>R$ 93,60</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><b>R$ 1.561,66</b></td>
             </tr>
           </tbody>
         </table>
+
         <div class="divider"></div><br>
         <!-- Chips -->
         <div class="row">
@@ -183,15 +187,40 @@
           <div class="chip black-text col s3" style="text-align: center;">Julho 22</div>
           <div class="black-text col s3" style="margin-top: 5px;"><a href="#"><i class="material-icons black-text">add</i></a></div>
         </div>
+
         <div class="divider"></div><br>
-        <div class="chips chips-placeholder" data-index="0" data-initialized="true">
-          <input id="aba3ca2f-e9aa-4b67-d29a-66e7a894a9db" class="input" placeholder="Escolha uma categoria">
+        <form id="category" action="#">
+          <p>
+            <div class="chip black-text col s3 red" style="text-align: center;">
+              <input name="group1" type="radio" id="test1" />
+              <label for="test1" class="white-text">Aluguel</label>
+            </div>
+
+            <div class="chip black-text col s3 yellow accent-4" style="text-align: center;">
+              <input name="group1" type="radio" id="test2" />
+              <label for="test2" class="white-text">Lazer</label>
+            </div>
+
+            <div class="chip black-text col s3 green" style="text-align: center;">
+              <input class="with-gap" name="group1" type="radio" id="test3"  />
+              <label for="test3" class="white-text">Stream</label>
+            </div>          
+            
+          </p>
+        </form>
+        <div class="divider"></div><br>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="labelValue" type="text" class="validate">
+            <label for="">Valor</label>
+          </div>
         </div>
 
       </div>
+
       <div class="modal-footer">
-        <a href="#!" class="waves-effect waves-green btn-flat">Salvar</a>
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sair</a>
+        <a href="#!" class="waves-effect waves-green btn-flat">Salvar</a>
       </div>
     </div>
 
@@ -202,6 +231,7 @@
 
     <!--Imports Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="/assets/js/init/loading.js"></script>
     <script type="text/javascript" src="/assets/js/init/menu.js"></script>
