@@ -1,5 +1,6 @@
 $(document).ready(function(){
-  loading();
+  login()
+  loading()
 });
 
 const loading = () => {
@@ -12,4 +13,8 @@ const loading = () => {
     $('#main').show()
     $('#footer').show()
   }, 1000)
+}
+
+const login = () => {
+  localStorage.setItem('userid', '1')
 }

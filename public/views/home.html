@@ -14,7 +14,7 @@
 
       <!-- Nav -->
       <section id="navbar" class="row">
-        <div class="chip">Julho</div>
+        <div class="chip">Agosto</div>
 
       </section>
 
@@ -23,8 +23,10 @@
           <ul class="collapsible popout" data-collapsible="accordion">
 
             <li>
+              <div style="display: none;" id="hidden">
+                <input type="text" id="labelid" value="1">
+              </div>
               <div class="collapsible-header">
-                <i class="material-icons">home</i>
                 Aluguel+
                 <div class="chip teal white-text col s3" style="text-align: center;">Paga</div>
               </div>
@@ -36,7 +38,6 @@
 
             <li>
               <div class="collapsible-header">
-                <i class="material-icons">lightbulb_outline</i>
                 Luz
                 <div class="chip teal white-text col s3" style="text-align: center;">Paga</div>
               </div>
@@ -48,7 +49,6 @@
 
             <li>
               <div class="collapsible-header">
-                <i class="material-icons">network_check</i>
                 Internet
                 <div class="chip black-text col s3" style="text-align: center;">Paga</div>
               </div>
@@ -215,6 +215,27 @@
             <label for="">Valor</label>
           </div>
         </div>
+        <!-- Switch -->
+        <!-- <div class="switch">
+          <label>
+            Usar Ícone?
+            <input type="checkbox" id="isIcon">
+            <span class="lever"></span>
+          </label>
+        </div> -->
+
+        <!-- Dropdown Trigger -->
+        <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown1'>Drop Me!</a>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+          <li><a href="#!">one</a></li>
+          <li><a href="#!">two</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">three</a></li>
+          <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+          <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+        </ul>
 
       </div>
 
@@ -233,9 +254,12 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js" integrity="sha512-uplugzeh2/XrRr7RgSloGLHjFV0b4FqUtbT5t9Sa/XcilDr1M3+88u/c+mw6+HepH7M2C5EVmahySsyilVHI/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <script type="text/javascript" src="/assets/js/init/loading.js"></script>
     <script type="text/javascript" src="/assets/js/init/menu.js"></script>
     <script type="text/javascript" src="/assets/js/init/footer.js"></script>
     <script type="text/javascript" src="/assets/js/home.js"></script>
+    <script type="text/javascript" src="/assets/js/createLabel.js"></script>
   </body>
 </html>
