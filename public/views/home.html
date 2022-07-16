@@ -32,6 +32,10 @@
         </div>
       </section>
 
+      <div class="progress" id="loadingLabel">
+        <div class="indeterminate"></div>
+      </div>
+      
       <section id="grid" class="row" style="display: none">
         <div class="col s12 m3">
           <div class="card grey lighten-5">
@@ -112,85 +116,65 @@
 
     <!-- Modal Structure -->
     <div id="createModal" class="modal">
-      <div class="modal-content">
-        <h2>
-          <div class="row col s12">
-            <div class="input-field">
-              <input id="labeltitle" type="text" class="validate">
-              <label for="">Título:</label>
-            </div>
-          </div> 
-        </h2>
-
-        <div class="divider"></div><br>
-
-        <form class="col s12">
+      <form>
+        <div class="modal-content">
+          <h2>
+            <div class="row col s12">
+              <div class="input-field">
+                <h2>
+                  <input id="labeltitle" type="text" class="validate">
+                  <label for="">Título:</label>
+                </h2>
+              </div>
+            </div> 
+          </h2>
+          <div class="divider"></div><br>
           <div class="input-field">
             <label for="first_name">Descrição:</label>
             <textarea id="textarea1" class="materialize-textarea"></textarea>
           </div>
-        </form>
-
-        <div class="divider"></div><br>
-
-        <div class="row">
-          <div class="chip">
-            Tag
+          <div class="divider"></div><br>
+          <a href="#!" id="createLabelPaid">
+            <div class="chip black-text">
+              Paga
+            </div>
+          </a>
+          <br /><br />
+          <div class="divider"></div><br>
+          <div id="category" action="#">
+            <p>Categorias:</p>
+            <p>
+              <div class="chip black-text col s3" style="text-align: center;">
+                <input class="with-gap" name="createCategoryLabel" class="red" type="radio" id="1" />
+                <label for="1" class="black-text">Casa</label>
+              </div>
+              <div class="chip black-text col s3" style="text-align: center;">
+                <input class="with-gap" name="createCategoryLabel" type="radio" id="2" />
+                <label for="2" class="black-text">Mercado</label>
+              </div>
+              <div class="chip black-text col s3" style="text-align: center;">
+                <input class="with-gap" name="createCategoryLabel" type="radio" id="3"  />
+                <label for="3" class="black-text">Lazer</label>
+              </div>               
+              <div class="chip black-text col s3" style="text-align: center;">
+                <input class="with-gap" name="createCategoryLabel" type="radio" id="4"  />
+                <label for="4" class="black-text">Transporte</label>
+              </div>               
+            </p>
+          </div>
+          <div class="divider"></div><br>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="labelValue" type="text" class="validate">
+              <label for="">Valor</label>
+            </div>
           </div>
         </div>
-
-        <div class="divider"></div><br>
-
-        <form id="category" action="#">
-          <p>Categorias:</p>
-          <p>
-            <div class="chip black-text col s3" style="text-align: center;">
-              <input name="group1" class="red" type="radio" id="test1" />
-              <label for="test1" class="black-text">Casa</label>
-            </div>
-
-            <div class="chip black-text col s3" style="text-align: center;">
-              <input name="group1" type="radio" id="test2" />
-              <label for="test2" class="black-text">Mercado</label>
-            </div>
-
-            <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="group1" type="radio" id="test3"  />
-              <label for="test3" class="black-text">Lazer</label>
-            </div>   
-            
-            <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="group1" type="radio" id="test4"  />
-              <label for="test4" class="black-text">Transporte</label>
-            </div>   
-            
-          </p>
-        </form>
-
-        <div class="divider"></div><br>
-
-        <div class="row">
-
-          <div class="input-field col s6">
-            <input id="labelValue" type="text" class="validate">
-            <label for="">Valor</label>
-          </div>
+        <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect waves-green btn-flat">Sair</a>
+          <a class="waves-effect waves-green btn-flat" id="btnSaveLabel">Salvar</a>
         </div>
-        <!-- Switch -->
-        <!-- <div class="switch">
-          <label>
-            Usar Ícone?
-            <input type="checkbox" id="isIcon">
-            <span class="lever"></span>
-          </label>
-        </div> -->
-
-      </div>
-
-      <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sair</a>
-        <a href="#!" class="waves-effect waves-green btn-flat">Salvar</a>
-      </div>
+      </form>
     </div>
 
     <div id="modal1" class="modal">
@@ -298,7 +282,7 @@
     </div>
 
     <!-- Loading... -->
-    <div class="progress" style="display: none;">
+    <div class="progress" id="spinnerInit" style="display: none;">
       <div class="indeterminate"></div>
     </div>
 
@@ -307,6 +291,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js" integrity="sha512-uplugzeh2/XrRr7RgSloGLHjFV0b4FqUtbT5t9Sa/XcilDr1M3+88u/c+mw6+HepH7M2C5EVmahySsyilVHI/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     
     <script type="text/javascript" src="/assets/js/init/loading.js"></script>
     <script type="text/javascript" src="/assets/js/init/menu.js"></script>

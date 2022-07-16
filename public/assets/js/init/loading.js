@@ -4,12 +4,12 @@ $(document).ready(function(){
 });
 
 const loading = () => {
-  $('.progress').show()
+  $('#spinnerInit').show()
   $('#main').hide()
   $('#footer').hide()
 
   setTimeout(function(){
-    $('.progress').hide()
+    $('#spinnerInit').hide()
     $('#main').show()
     $('#footer').show()
   }, 1000)
