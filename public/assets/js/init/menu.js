@@ -1,9 +1,9 @@
 $(document).ready(function(){
+  console.log('menu.js');
   $('#menu').prepend(menu)
   $('.collapsible').collapsible();
   $(".button-collapse").sideNav();
   $(".button-collapse").css('margin', '5px');
-  console.log('#menu');
   $('ul.tabs').tabs();
 });
 

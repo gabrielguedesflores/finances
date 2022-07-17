@@ -1,15 +1,13 @@
 $(document).ready(function(){
-  console.log('#footer')
+  console.log('footer.js')
   $('#footer').append(footer)
 
   $('#btnLayoutGrid').on('click', () => {
-    console.log('btnLayoutGrid')
     $('#list').hide('slow')
     $('#grid').show('slow')
   })
 
   $('#btnLayoutList').on('click', () => {
-    console.log('btnLayoutList')
     $('#list').show('slow')
     $('#grid').hide('slow')
   })

@@ -31,7 +31,7 @@ const buildLabel = (label) => {
       </div>
       <div class="collapsible-body">
         <span>R$ ${label.labelvalue}</span>
-        <a href="#modal${label.labelid}" style="float: right;" class="black-text modal-trigger"><i class="material-icons">create</i></a>
+        <a class="waves-effect waves-light modal-trigger black-text" data-target="modal${label.labelid}" href="#modal${label.labelid}" style="float: right;"><i class="material-icons">create</i></a>
       </div>
     </li>`
 }
@@ -110,8 +110,9 @@ const initLabel = async(userid) => {
   $('#loadingLabel').show()
   const label = await getLabel(userid)
   for (let i = 0; i < label.length; i++) {
-    $('#modais').append(buildModal(label[i]))
     $('.collapsible').append(buildLabel(label[i]))
+    $('#main').append(buildModal(label[i]))
+    $(`#modal${label[i].labelid}`).modal()
   }
   console.log(label);
   $('#loadingLabel').hide()
@@ -142,7 +143,7 @@ const controllerCreateLabel = async() => {
 		"labeldesc": $('#createModal').find('textarea')[0].value,
 		"labelpaid": returnPaid(),
 		"labeldate": moment().format('YYYY-MM-DD'),
-		"labelvalue": "1500",
+		"labelvalue": $('#createModal').find('input')[5].value,
 		"userid": localStorage.getItem('userid'),
     "labelcategoryid": returnCategoryLabel()
 	}
