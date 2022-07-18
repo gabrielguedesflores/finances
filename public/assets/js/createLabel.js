@@ -1,6 +1,7 @@
 $(document).ready(function(){
-  setTimeout(function(){
+  setTimeout(async function(){
     initLabel(localStorage.getItem('userid'))
+    //await handlersLabel(localStorage.getItem('userid'))
   }, 2000)
   $('#btnSaveLabel').on('click', controllerCreateLabel)
 });
@@ -50,18 +51,18 @@ const buildModal = (label) => {
             <div class="input-field">
               <h2>
                 <input id="labeltitle" type="text" class="validate" value="${label.labeltitle}">
-                <label for="">Título:</label>
               </h2>
             </div>
           </div> 
         </h2>
         <div class="divider"></div><br>
-        <div class="input-field">
-          <label for="first_name">Descrição:</label>
-          <textarea id="labeldesc" class="materialize-textarea">${label.labeldesc}</textarea>
+        <div class="row col s12">
+          <div class="input-field">
+            <textarea id="labeldesc" class="materialize-textarea">${label.labeldesc}</textarea>
+          </div>
         </div>
         <div class="divider"></div><br>
-        <a href="#!" id="labelpaid">
+        <a href="#!" onclick="handleLabelPaid('labelpaid${label.labelid}')" id="labelpaid${label.labelid}">
           <div class="chip ${labelpaidAux}">
             Paga
           </div>
@@ -72,19 +73,19 @@ const buildModal = (label) => {
           <p>Categorias:</p>
           <p>
             <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="createCategoryLabel" class="red" type="radio" id="1" />
+              <input class="with-gap" name="categories" class="red" type="radio" id="categoryModal${label.labelid}" />
               <label for="1" class="black-text">Casa</label>
             </div>
             <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="createCategoryLabel" type="radio" id="2" />
+              <input class="with-gap" name="categories" type="radio" id="categoryModal${label.labelid}" />
               <label for="2" class="black-text">Mercado</label>
             </div>
             <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="createCategoryLabel" type="radio" id="3"  />
+              <input class="with-gap" name="categories" type="radio" id="categoryModal${label.labelid}"  />
               <label for="3" class="black-text">Lazer</label>
             </div>               
             <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="createCategoryLabel" type="radio" id="4"  />
+              <input class="with-gap" name="categories" type="radio" id="categoryModal${label.labelid}"  />
               <label for="4" class="black-text">Transporte</label>
             </div>               
           </p>
@@ -93,7 +94,6 @@ const buildModal = (label) => {
         <div class="row">
           <div class="input-field col s6">
             <input id="labelvalue" type="text" class="validate" value="${label.labelvalue}">
-            <label for="">Valor</label>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@ const initLabel = async(userid) => {
   for (let i = 0; i < label.length; i++) {
     $('.collapsible').append(buildLabel(label[i]))
     $('#main').append(buildModal(label[i]))
-    $(`#modal${label[i].labelid}`).modal()
+    $(`#modal${label[i].labelid}`).modal()    
   }
   console.log(label);
   $('#loadingLabel').hide()
@@ -164,3 +164,23 @@ const returnCategoryLabel = () => {
     }
   }
 }
+
+const handleLabelPaid = (element) => {
+  const isPaidName = $(`#${element}`).find('div')[0].className
+  if(isPaidName.includes('teal')){
+    $(`#${element}`).find('div').eq(0).removeClass('teal')
+    $(`#${element}`).find('div').eq(0).removeClass('white-text')
+    $(`#${element}`).find('div').eq(0).addClass('black-text')
+  }else{
+    $(`#${element}`).find('div').eq(0).removeClass('black-text')
+    $(`#${element}`).find('div').eq(0).addClass('teal')
+    $(`#${element}`).find('div').eq(0).addClass('white-text')
+  }
+}
+
+// const handlersLabel = async (userid) => {
+//   const data = await getLabel(userid)
+//   for (let i = 0; i < data.length; i++) {
+//     $(`#labelpaid${data[i].labelid}`).on('click', handleLabelPaid)
+//   }  
+// }

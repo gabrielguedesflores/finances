@@ -5,7 +5,7 @@ $(document).ready(function(){
 });
 
 const binds = () => {
-  $("#labelValue").mask('R$ #.##0,00')
+  //$("#labelValue").mask('R$ #.##0,00')
 }
 
 const calledMaterialize = () => {
@@ -31,5 +31,4 @@ const handlePaid = () => {
     $('#createLabelPaid').find('div').eq(0).addClass('teal')
     $('#createLabelPaid').find('div').eq(0).addClass('white-text')
   }
-  
 }

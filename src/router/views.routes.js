@@ -11,7 +11,7 @@ viewsRouter.get("/meu-perfil", function (_, res) {
 });
 
 viewsRouter.get("/categorias", function (_, res) {
-  res.sendFile(path.resolve('./public/views/my-profile.html'));
+  res.sendFile(path.resolve('./public/views/categories.html'));
 });
 
 viewsRouter.get("/meus-ganhos", function (_, res) {
