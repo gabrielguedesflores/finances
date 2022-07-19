@@ -46,6 +46,7 @@ const buildModal = (label) => {
         <input id="labelid" type="text" value="${label.labelid}">
       </div>
       <div class="modal-content">
+        <p class="labelParag">Título: </p>
         <h2>
           <div class="row col s12">
             <div class="input-field">
@@ -58,6 +59,7 @@ const buildModal = (label) => {
         <div class="divider"></div><br>
         <div class="row col s12">
           <div class="input-field">
+            <p class="labelParag">Descrição: </p>
             <textarea id="labeldesc" class="materialize-textarea">${label.labeldesc}</textarea>
           </div>
         </div>
@@ -70,7 +72,7 @@ const buildModal = (label) => {
         <br /><br />
         <div class="divider"></div><br>
         <div id="category" action="#">
-          <p>Categorias:</p>
+          <p class="labelParag">Categorias:</p>
           <p>
             <div class="chip black-text col s3" style="text-align: center;">
               <input class="with-gap" name="categories" class="red" type="radio" id="categoryModal${label.labelid}" />
@@ -93,6 +95,7 @@ const buildModal = (label) => {
         <div class="divider"></div><br>
         <div class="row">
           <div class="input-field col s6">
+            <p class="labelParag">Valor:</p>
             <input id="labelvalue" type="text" class="validate" value="${label.labelvalue}">
           </div>
         </div>

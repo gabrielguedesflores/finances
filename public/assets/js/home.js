@@ -10,7 +10,6 @@ const binds = () => {
 
 const calledMaterialize = () => {
   $('.modal').modal();
-  $('.modal-trigger').modal();
   $('.chips').on('chip.select', function(e, chip){
     console.log('handlePaid');
   });
