@@ -4,6 +4,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="/assets/css/categories.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body id="body">
@@ -15,17 +16,17 @@
       <div class="row" style="float: center; display: block;">
         <form class="col s12">
           <div class="row">
-            <div class="input-field col s9">
-              <input placeholder="Adicione uma categoria..." id="first_name" type="text" class="validate">
-              <label for="first_name">Nova Categoria</label>
+            <div class="input-field col s10">
+              <input placeholder="Adicione uma categoria..." id="addNewCategory" type="text" class="validate">
+              <label for="addNewCategory">Nova Categoria</label>
             </div>
-            <div class="input-field col s3">
+            <div class="input-field col s2">
               <a class="btn-floating btn-large waves-effect waves-light red" id="buttonAddCategory"><i class="material-icons">add</i></a>
             </div>
           </div>
         </form>
       </div>
-      <section id="total" class="col s12 m8 offset-m2 l6 offset-l3 centered" style="margin: 50px 50px 50px 50px;">
+      <section id="total" class="col s12 m8 offset-m2 l6 offset-l3 centered" style="display: none;">
         <div class="card-panel grey lighten-5 z-depth-1">
           <div class="row valign-wrapper">
             <div class="col s12">
@@ -45,7 +46,11 @@
           </div>
         </div>
       </section>
-
+      <section id="noCategories" style="display: none">
+        <blockquote>
+          Você não tem categorias cadastradas...
+        </blockquote>
+      </section>
     </div>
 
     <!-- Loading... -->
@@ -59,7 +64,7 @@
     <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js" integrity="sha512-uplugzeh2/XrRr7RgSloGLHjFV0b4FqUtbT5t9Sa/XcilDr1M3+88u/c+mw6+HepH7M2C5EVmahySsyilVHI/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script type="text/javascript" src="/assets/js/init/loading.js"></script>
     <script type="text/javascript" src="/assets/js/init/menu.js"></script>
     <script type="text/javascript" src="/assets/js/categories.js"></script>
