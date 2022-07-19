@@ -1,10 +1,46 @@
 $(document).ready(function(){
   setTimeout(async function(){
     initLabel(localStorage.getItem('userid'))
-    //await handlersLabel(localStorage.getItem('userid'))
   }, 2000)
   $('#btnSaveLabel').on('click', controllerCreateLabel)
 });
+
+const initLabel = async(userid) => {
+  $('#loadingLabel').show()
+  const label = await getLabel(userid)
+  const category = await getCategory(userid)
+
+  for (let i = 0; i < label.length; i++) {
+    $('.collapsible').append(buildLabel(label[i]))
+    $('#main').append(await buildModal(label[i]))
+    $(`#modal${label[i].labelid}`).modal()    
+  }
+
+  for (let index = 0; index < category.length; index++) {
+    $('.categoryRadioButton').append(buildCategory(category[index]), index)
+  }
+  
+  $('#loadingLabel').hide()
+}
+
+const controllerCreateLabel = async() => {
+  console.log('Creating label');
+  const newLabel = {
+		"labeltitle": $('#createModal').find('input')[0].value,
+		"labeldesc": $('#createModal').find('textarea')[0].value,
+		"labelpaid": returnPaid(),
+		"labeldate": moment().format('YYYY-MM-DD'),
+		"labelvalue": $('#createModal').find('input')[5].value,
+		"userid": localStorage.getItem('userid'),
+    "labelcategoryid": returnCategoryLabel()
+	}
+  await createLabel(newLabel)
+  console.log(newLabel);
+  return true
+}
+
+
+/* Requests */
 
 const url = `https://finance-control-fc-api.herokuapp.com/api`
 
@@ -18,6 +54,37 @@ const getLabel = async(userid) => {
     console.error(error);
   }
 }
+
+const createLabel = async(data) => {
+  try {
+    const { insert } = await axios.post(url + '/label/create', {
+      labeltitle: data.labeltitle,
+      labeldesc: data.labeldesc,
+      labelpaid: data.labelpaid,
+      labeldate: data.labeldate,
+      labelvalue: data.labelvalue,
+      userid: data.userid,
+      categoryid: data.categoryid,
+    });
+    location.reload();
+    return insert
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const getCategory = async(userid) => {
+  try {
+    const { data } = await axios.post(url + '/category', {
+      userid: userid
+    });
+    return data
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+/* Builds */
 
 const buildLabel = (label) => {
   const labelpaidAux = label.labelpaid == true ? 'teal white-text' : 'black-text'
@@ -37,7 +104,7 @@ const buildLabel = (label) => {
     </li>`
 }
 
-const buildModal = (label) => {
+const buildModal = async(label) => {
   const labelpaidAux = label.labelpaid == true ? 'teal white-text' : 'black-text'
   return `
   <div id="modal${label.labelid}" class="modal">
@@ -71,26 +138,9 @@ const buildModal = (label) => {
         </a>
         <br /><br />
         <div class="divider"></div><br>
-        <div id="category" action="#">
+        <div class="" action="#">
           <p class="labelParag">Categorias:</p>
-          <p>
-            <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="categories" class="red" type="radio" id="categoryModal${label.labelid}" />
-              <label for="1" class="black-text">Casa</label>
-            </div>
-            <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="categories" type="radio" id="categoryModal${label.labelid}" />
-              <label for="2" class="black-text">Mercado</label>
-            </div>
-            <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="categories" type="radio" id="categoryModal${label.labelid}"  />
-              <label for="3" class="black-text">Lazer</label>
-            </div>               
-            <div class="chip black-text col s3" style="text-align: center;">
-              <input class="with-gap" name="categories" type="radio" id="categoryModal${label.labelid}"  />
-              <label for="4" class="black-text">Transporte</label>
-            </div>               
-          </p>
+          <p class="categoryRadioButton"></p>
         </div>
         <div class="divider"></div><br>
         <div class="row">
@@ -105,55 +155,18 @@ const buildModal = (label) => {
         <a class="waves-effect waves-green btn-flat" id="btnSaveLabel">Salvar</a>
       </div>
     </form>
-  </div>    
+  </div>  
   `
 }
 
-const initLabel = async(userid) => {
-  $('#loadingLabel').show()
-  const label = await getLabel(userid)
-  for (let i = 0; i < label.length; i++) {
-    $('.collapsible').append(buildLabel(label[i]))
-    $('#main').append(buildModal(label[i]))
-    $(`#modal${label[i].labelid}`).modal()    
-  }
-  console.log(label);
-  $('#loadingLabel').hide()
-}
+const buildCategory = (categories, label) => {
+  return `
+  <div class="chip black-text col s3" style="text-align: center;">
+    <input class="with-gap" name="categories_${label}" class="red" type="radio" id="categoryid${categories.categoryid}_labelid${label}" />
+    <label for="categoryid${categories.categoryid}_labelid${label}" class="black-text">${categories.categorydesc}</label>
+  </div>`}
 
-const createLabel = async(data) => {
-  try {
-    const { insert } = await axios.post(url + '/label/create', {
-      labeltitle: data.labeltitle,
-      labeldesc: data.labeldesc,
-      labelpaid: data.labelpaid,
-      labeldate: data.labeldate,
-      labelvalue: data.labelvalue,
-      userid: data.userid,
-      categoryid: data.categoryid,
-    });
-    location.reload();
-    return insert
-  } catch (error) {
-    console.error(error);
-  }
-}
 
-const controllerCreateLabel = async() => {
-  console.log('Creating label');
-  const newLabel = {
-		"labeltitle": $('#createModal').find('input')[0].value,
-		"labeldesc": $('#createModal').find('textarea')[0].value,
-		"labelpaid": returnPaid(),
-		"labeldate": moment().format('YYYY-MM-DD'),
-		"labelvalue": $('#createModal').find('input')[5].value,
-		"userid": localStorage.getItem('userid'),
-    "labelcategoryid": returnCategoryLabel()
-	}
-  await createLabel(newLabel)
-  console.log(newLabel);
-  return true
-}
 
 const returnPaid = () => {
   const isPaidName = $('#createLabelPaid').find('div')[0].className
@@ -180,10 +193,3 @@ const handleLabelPaid = (element) => {
     $(`#${element}`).find('div').eq(0).addClass('white-text')
   }
 }
-
-// const handlersLabel = async (userid) => {
-//   const data = await getLabel(userid)
-//   for (let i = 0; i < data.length; i++) {
-//     $(`#labelpaid${data[i].labelid}`).on('click', handleLabelPaid)
-//   }  
-// }
