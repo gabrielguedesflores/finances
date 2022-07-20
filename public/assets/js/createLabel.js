@@ -1,16 +1,19 @@
 $(document).ready(function(){
+  const idUser = localStorage.getItem('userid')
+
+  categoriesInit(idUser)
   setTimeout(async function(){
-    initLabel(localStorage.getItem('userid'))
+    initLabel(idUser)
   }, 2000)
   $('#btnSaveLabel').on('click', controllerCreateLabel)
 });
 
 const initLabel = async(userid) => {
   $('#loadingLabel').show()
-  const label = await getLabel(userid)
-  const category = await getCategory(userid)
-
-  if(label.length >= 1){
+  try {
+    const label = await getLabel(userid)
+    const category = await getCategory(userid)
+    console.log(label.length);
     for (let i = 0; i < label.length; i++) {
       $('.collapsible').append(buildLabel(label[i]))
       $('#main').append(await buildModal(label[i]))
@@ -20,24 +23,50 @@ const initLabel = async(userid) => {
       }
     }
     $('#loadingLabel').hide()
-  }else{
+
+  } catch (error) {
     $('.collapsible').append(`
     <blockquote>
       Você não tem categorias cadastradas...
     </blockquote>`)
+    $('#loadingLabel').hide()
   }
+
 }
 
 const controllerCreateLabel = async() => {
-  console.log('Creating label');
+  const labeltitle = $('#createModal').find('input')[0].value
+  const labeldesc = $('#createModal').find('textarea')[0].value
+  const labelpaid = returnPaidModalNew()
+  const labeldate = moment().format('YYYY-MM-DD')
+  const labelvalue = $('#labelvalue').val()
+  const userid = localStorage.getItem('userid')
+  const labelcategoryid = parseInt(returnCategoryLabel())
+  console.log(labelcategoryid);
+
+  if(labeltitle == ''){
+    toastNotifyError('Campo <b>Título</b> é obrigatório.')
+    return false
+  }
+
+  if(labeldesc == ''){
+    toastNotifyError('Campo <b>Descrição</b> é obrigatório.')
+    return false
+  }
+
+  if(labelvalue == ''){
+    toastNotifyError('Campo <b>Valor</b> é obrigatório.')
+    return false
+  }
+
   const newLabel = {
-		"labeltitle": $('#createModal').find('input')[0].value,
-		"labeldesc": $('#createModal').find('textarea')[0].value,
-		"labelpaid": returnPaid(),
-		"labeldate": moment().format('YYYY-MM-DD'),
-		"labelvalue": $('#createModal').find('input')[5].value,
-		"userid": localStorage.getItem('userid'),
-    "labelcategoryid": returnCategoryLabel()
+		"labeltitle": labeltitle,
+		"labeldesc": labeldesc,
+		"labelpaid": labelpaid,
+		"labeldate": labeldate,
+		"labelvalue": labelvalue,
+		"userid": userid,
+    "labelcategoryid": labelcategoryid
 	}
   await createLabel(newLabel)
   console.log(newLabel);
@@ -111,6 +140,18 @@ const createLabel = async(data) => {
   }
 }
 
+const deleteLabel = async(labelid) => {
+  try {
+    const { data } = await axios.post(url + '/label/delete', {
+      labelid: labelid
+    });
+    location.reload();
+    return data
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const getCategory = async(userid) => {
   try {
     const { data } = await axios.post(url + '/category', {
@@ -121,6 +162,8 @@ const getCategory = async(userid) => {
     console.error(error);
   }
 }
+
+
 
 
 /* Builds */
@@ -191,7 +234,8 @@ const buildModal = async(label) => {
       </div>
       <div class="modal-footer">
         <a class="modal-action modal-close waves-effect waves-green btn-flat">Sair</a>
-        <a class="waves-effect waves-green btn-flat" onclick="controllerEditLabel(${label.labelid})">Salvar</a>
+        <a class="waves-effect waves-green btn-flat" onclick="deleteLabel(${label.labelid})" style="color: red;">Excluir</a>
+        <a class="waves-effect waves-green btn-flat" onclick="controllerEditLabel(${label.labelid})" style="color: green;">Salvar</a>
       </div>
     </form>
   </div>  
@@ -228,12 +272,24 @@ const returnPaid = (labelid) => {
   return isPaidName.includes('teal') ? true : false
 }
 
+const returnPaidModalNew = () => {
+  const isPaidName = $(`#createLabelPaid`).find('div')[0].className
+  return isPaidName.includes('teal') ? true : false
+}
+
 const returnCategoryLabel = () => {
-  for (let i = 0; i < $('input[name=createCategoryLabel]').length; i++) {
-    if($('input[name=createCategoryLabel]')[i].checked) {
-      return ;
+  let category;
+  for (let i = 0; i < $('input[name=categories_New]').length; i++) {
+    if($('input[name=categories_New]')[i].checked) {
+      category = $('input[name=categories_New]')[i].id;
     }
   }
+  if(category == undefined){
+    toastNotifyError('O campo <b>Categorias</b> é obrigatório. Caso você não possua nenhuma cadastrada, vá até o menu Categorias!')
+    return false;
+  }
+  category = category.slice(0, category.indexOf('_'))
+  return category.replace(/[^0-9]/g,'')
 }
 
 const handleLabelPaid = (element) => {
@@ -268,4 +324,22 @@ function toastNotifyError (message){
     "hideMethod": "fadeOut"
   };
   toastr.error(message);
+}
+
+const categoriesInit = async (userid) => {
+  try {
+    const categories = await getCategory (userid);
+    const labelAux = {
+      labelid: 'New'
+    }
+    for (let i = 0; i < categories.length; i++) {
+      $('.newLabelCategory').append(buildCategory(categories[i], labelAux))
+    }
+  } catch (error) {
+    $('.newLabelCategory').append(`
+      <blockquote>
+        Você não tem categorias cadastradas... <a href="/categorias">Criar</a>
+      </blockquote>
+    `)
+  }
 }

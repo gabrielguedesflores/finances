@@ -9,7 +9,7 @@ const url = `https://finance-control-fc-api.herokuapp.com/api`;
 
 function toastNotifyError (message){
   toastr.options = {
-    "closeButton": true,
+    "closeButton": false,
     "debug": false,
     "newestOnTop": true,
     "progressBar": false,
@@ -141,6 +141,7 @@ const handlerDeleteCategory = async(categoryid) => {
     return data
   } catch (error) {
     console.error(error);
+    toastNotifyError("Existe despesa(s) vinculada a essa categoria.")
   }
 }
 
