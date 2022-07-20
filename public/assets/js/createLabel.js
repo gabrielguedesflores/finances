@@ -10,17 +10,22 @@ const initLabel = async(userid) => {
   const label = await getLabel(userid)
   const category = await getCategory(userid)
 
-  for (let i = 0; i < label.length; i++) {
-    $('.collapsible').append(buildLabel(label[i]))
-    $('#main').append(await buildModal(label[i]))
-    $(`#modal${label[i].labelid}`).modal()    
+  if(label.length >= 1){
+    for (let i = 0; i < label.length; i++) {
+      $('.collapsible').append(buildLabel(label[i]))
+      $('#main').append(await buildModal(label[i]))
+      $(`#modal${label[i].labelid}`).modal()   
+      for (let index = 0; index < category.length; index++) {
+        $(`.categoryRadioButton${label[i].labelid}`).append(buildCategory(category[index], label[i]))
+      }
+    }
+    $('#loadingLabel').hide()
+  }else{
+    $('.collapsible').append(`
+    <blockquote>
+      Você não tem categorias cadastradas...
+    </blockquote>`)
   }
-
-  for (let index = 0; index < category.length; index++) {
-    $('.categoryRadioButton').append(buildCategory(category[index]), index)
-  }
-  
-  $('#loadingLabel').hide()
 }
 
 const controllerCreateLabel = async() => {
@@ -37,6 +42,39 @@ const controllerCreateLabel = async() => {
   await createLabel(newLabel)
   console.log(newLabel);
   return true
+}
+
+const controllerEditLabel = (labelid) => {
+  const labeltitle = $(`#labeltitle${labelid}`).val()
+  const labeldesc = $(`#labeldesc${labelid}`).val()
+  const labelpaid = returnPaid(labelid)
+  const labeldate = moment().format('YYYY-MM-DD')
+  const labelvalue = $(`#labelvalue${labelid}`).val()
+  const userid = localStorage.getItem('userid')
+  const labelcategoryid = returnCategoryModal(labelid)
+
+  if(labeltitle == ''){
+    toastNotifyError('Campo <b>Título</b> é obrigatório.')
+  }
+
+  if(labeldesc == ''){
+    toastNotifyError('Campo <b>Descrição</b> é obrigatório.')
+  }
+
+  if(labelvalue == ''){
+    toastNotifyError('Campo <b>Valor</b> é obrigatório.')
+  }
+  
+  const newLabel = {
+    "labeltitle": labeltitle,
+    "labeldesc": labeldesc,
+    "labelpaid": labelpaid,
+    "labeldate": labeldate,
+    "labelvalue": labelvalue,
+    "userid": userid,
+    "labelcategoryid": labelcategoryid
+  }
+  console.log(newLabel);
 }
 
 
@@ -84,6 +122,7 @@ const getCategory = async(userid) => {
   }
 }
 
+
 /* Builds */
 
 const buildLabel = (label) => {
@@ -110,7 +149,7 @@ const buildModal = async(label) => {
   <div id="modal${label.labelid}" class="modal">
     <form>
       <div class="input-field" style="display: none;">
-        <input id="labelid" type="text" value="${label.labelid}">
+        <input id="labelid${label.labelid}" type="text" value="${label.labelid}">
       </div>
       <div class="modal-content">
         <p class="labelParag">Título: </p>
@@ -118,7 +157,7 @@ const buildModal = async(label) => {
           <div class="row col s12">
             <div class="input-field">
               <h2>
-                <input id="labeltitle" type="text" class="validate" value="${label.labeltitle}">
+                <input id="labeltitle${label.labelid}" type="text" class="validate" value="${label.labeltitle}">
               </h2>
             </div>
           </div> 
@@ -127,7 +166,7 @@ const buildModal = async(label) => {
         <div class="row col s12">
           <div class="input-field">
             <p class="labelParag">Descrição: </p>
-            <textarea id="labeldesc" class="materialize-textarea">${label.labeldesc}</textarea>
+            <textarea id="labeldesc${label.labelid}" class="materialize-textarea">${label.labeldesc}</textarea>
           </div>
         </div>
         <div class="divider"></div><br>
@@ -140,19 +179,19 @@ const buildModal = async(label) => {
         <div class="divider"></div><br>
         <div class="" action="#">
           <p class="labelParag">Categorias:</p>
-          <p class="categoryRadioButton"></p>
+          <p class="categoryRadioButton${label.labelid}"></p>
         </div>
         <div class="divider"></div><br>
         <div class="row">
           <div class="input-field col s6">
             <p class="labelParag">Valor:</p>
-            <input id="labelvalue" type="text" class="validate" value="${label.labelvalue}">
+            <input id="labelvalue${label.labelid}" type="text" class="validate" value="${label.labelvalue}">
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <a class="modal-action modal-close waves-effect waves-green btn-flat">Sair</a>
-        <a class="waves-effect waves-green btn-flat" id="btnSaveLabel">Salvar</a>
+        <a class="waves-effect waves-green btn-flat" onclick="controllerEditLabel(${label.labelid})">Salvar</a>
       </div>
     </form>
   </div>  
@@ -162,21 +201,37 @@ const buildModal = async(label) => {
 const buildCategory = (categories, label) => {
   return `
   <div class="chip black-text col s3" style="text-align: center;">
-    <input class="with-gap" name="categories_${label}" class="red" type="radio" id="categoryid${categories.categoryid}_labelid${label}" />
-    <label for="categoryid${categories.categoryid}_labelid${label}" class="black-text">${categories.categorydesc}</label>
-  </div>`}
+    <input class="with-gap red" name="categories_${label.labelid}" type="radio" id="categoryid${categories.categoryid}_labelid${label.labelid}" />
+    <label for="categoryid${categories.categoryid}_labelid${label.labelid}" class="black-text">${categories.categorydesc}</label>
+  </div>`
+}
 
 
+const returnCategoryModal = (labelid) => {
+  let category;
+  for (let i = 0; i < $(`input[name=categories_${labelid}]`).length; i++) {
+    if($(`input[name=categories_${labelid}]`)[i].checked) {
+      category = $(`input[name=categories_${labelid}]`)[i].id;
+    }
+  }
+  console.log(category);
+  if(category == undefined){
+    toastNotifyError('O campo <b>Categorias</b> é obrigatório. Caso você não possua nenhuma cadastrada, vá até o menu Categorias!')
+    return false;
+  }
+  category = category.slice(0, category.indexOf('_'))
+  return category.replace(/[^0-9]/g,'')
+}
 
-const returnPaid = () => {
-  const isPaidName = $('#createLabelPaid').find('div')[0].className
+const returnPaid = (labelid) => {
+  const isPaidName = $(`#labelpaid${labelid}`).find('div')[0].className
   return isPaidName.includes('teal') ? true : false
 }
 
 const returnCategoryLabel = () => {
   for (let i = 0; i < $('input[name=createCategoryLabel]').length; i++) {
     if($('input[name=createCategoryLabel]')[i].checked) {
-      return $('input[name=createCategoryLabel]')[i].id;
+      return ;
     }
   }
 }
@@ -192,4 +247,25 @@ const handleLabelPaid = (element) => {
     $(`#${element}`).find('div').eq(0).addClass('teal')
     $(`#${element}`).find('div').eq(0).addClass('white-text')
   }
+}
+
+function toastNotifyError (message){
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+  toastr.error(message);
 }

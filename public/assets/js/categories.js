@@ -27,6 +27,7 @@ function toastNotifyError (message){
   };
   toastr.error(message);
 }
+
 const getCategory = async(userid) => {
   try {
     const { data } = await axios.post(url + '/category', {
