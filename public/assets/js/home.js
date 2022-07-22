@@ -2,6 +2,10 @@ $(document).ready(function(){
   binds()
   handlersHome()
   calledMaterialize()
+
+  setTimeout(function() {
+    
+  }, 3000)
 });
 
 const binds = () => {

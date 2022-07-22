@@ -4,34 +4,53 @@
   <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/assets/css/my-profile.css"  />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body>
     <div class="container" id="main">
       <div class="row" id="menu"></div>
+      
+      <!-- <img class="responsive-img" src="/assets/images/perfil.jpg" alt=""> -->
+
       <div class="row">
         <form class="col s12 left-align">
-          <div class="row">
-            <div class="input-field col s12">
-              <input placeholder="Nome" id="name" type="text" class="validate">
-              <label for="name">Nome</label>
+          <input id="userid" type="hidden">
+          <div class="row" id="imageForm">
+            <div class="input-field col s6">
+              <img class="circle" src="assets/images/perfil.jpg">
+            </div>
+            <div class="file-field input-field col s6">
+              <div class="btn red">
+                <span>Foto de Perfil</span>
+                <input type="file" class="red">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" class="validate" placeholder="E-mail">
-              <label for="email">Email</label>
+              <input placeholder="Nome" id="username" type="text" class="validate">
+              <label for="username">Nome</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate" placeholder="Senha">
-              <label for="password">Password</label>
+              <input id="useremail" type="email" class="validate" placeholder="E-mail">
+              <label for="useremail">Email</label>
             </div>
           </div>
-          <div id="buttonSubmit" class="center-align" style="float: center;">
-            <a class="waves-effect waves-light btn-large red"><i class="material-icons right">clear</i>Limpar</a>
-            <a class="waves-effect waves-light btn-large red"><i class="material-icons right">send</i>Salvar</a>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="userpassword" type="password" class="validate" placeholder="Senha">
+              <label for="passwuserpasswordord">Password</label>
+            </div>
+          </div>
+          <div  class="center-align" style="float: center;">
+            <!-- <a class="waves-effect waves-light btn-large red"><i class="material-icons right">clear</i>Limpar</a> -->
+            <a class="waves-effect waves-light btn-large red" id="buttonSubmit"><i class="material-icons right">send</i>Salvar</a>
           </div>
         </form>
       </div>
@@ -46,7 +65,12 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js" integrity="sha512-uplugzeh2/XrRr7RgSloGLHjFV0b4FqUtbT5t9Sa/XcilDr1M3+88u/c+mw6+HepH7M2C5EVmahySsyilVHI/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
     <script type="text/javascript" src="/assets/js/init/menu.js"></script>
     <script type="text/javascript" src="/assets/js/init/footer.js"></script>
+    <script type="text/javascript" src="/assets/js/my-profile.js"></script>
   </body>
 </html>
