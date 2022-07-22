@@ -13,13 +13,16 @@ const initLabel = async(userid) => {
   try {
     const label = await getLabel(userid)
     const category = await getCategory(userid)
-    console.log(label.length);
+    console.log("total de labels encontrada: " + label.length);
     for (let i = 0; i < label.length; i++) {
       $('.collapsible').append(buildLabel(label[i]))
       $('#main').append(await buildModal(label[i]))
       $(`#modal${label[i].labelid}`).modal()   
       for (let index = 0; index < category.length; index++) {
         $(`.categoryRadioButton${label[i].labelid}`).append(buildCategory(category[index], label[i]))
+        if(category[index].categoryid == label[i].categoryid){
+          $(`input[name=categories_${label[i].labelid}]`)[index].checked = true
+        }
       }
     }
     $('#loadingLabel').hide()
@@ -41,8 +44,8 @@ const controllerCreateLabel = async() => {
   const labeldate = moment().format('YYYY-MM-DD')
   const labelvalue = $('#labelvalue').val()
   const userid = localStorage.getItem('userid')
-  const labelcategoryid = parseInt(returnCategoryLabel())
-  console.log(labelcategoryid);
+  const categoryid = parseInt(returnCategoryLabel())
+  console.log(categoryid);
 
   if(labeltitle == ''){
     toastNotifyError('Campo <b>Título</b> é obrigatório.')
@@ -66,14 +69,19 @@ const controllerCreateLabel = async() => {
 		"labeldate": labeldate,
 		"labelvalue": labelvalue,
 		"userid": userid,
-    "labelcategoryid": labelcategoryid
+    "categoryid": categoryid
 	}
-  await createLabel(newLabel)
   console.log(newLabel);
-  return true
+  if(categoryid){
+    await createLabel(newLabel)
+    location.reload();
+    return true
+  }else{
+    return false;
+  }
 }
 
-const controllerEditLabel = (labelid) => {
+const controllerEditLabel = async(labelid) => {
   const labeltitle = $(`#labeltitle${labelid}`).val()
   const labeldesc = $(`#labeldesc${labelid}`).val()
   const labelpaid = returnPaid(labelid)
@@ -98,12 +106,15 @@ const controllerEditLabel = (labelid) => {
     "labeltitle": labeltitle,
     "labeldesc": labeldesc,
     "labelpaid": labelpaid,
-    "labeldate": labeldate,
     "labelvalue": labelvalue,
-    "userid": userid,
-    "labelcategoryid": labelcategoryid
+    "categoryid": labelcategoryid,
+    "labelid": labelid
   }
   console.log(newLabel);
+  await editLabel(newLabel);
+
+  location.reload();
+  return true
 }
 
 
@@ -123,6 +134,7 @@ const getLabel = async(userid) => {
 }
 
 const createLabel = async(data) => {
+  console.log(data);
   try {
     const { insert } = await axios.post(url + '/label/create', {
       labeltitle: data.labeltitle,
@@ -133,8 +145,27 @@ const createLabel = async(data) => {
       userid: data.userid,
       categoryid: data.categoryid,
     });
-    location.reload();
-    return insert
+    console.log(insert);
+    return true
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+const editLabel = async(data) => {
+  console.log(data);
+  try {
+    const { create } = await axios.post(url + '/label/edit', {
+      labeltitle: data.labeltitle,
+      labeldesc: data.labeldesc,
+      labelpaid: data.labelpaid,
+      labelvalue: data.labelvalue,
+      categoryid: data.categoryid,
+      labelid: data.labelid
+    });
+    console.log(create);
+    return create
   } catch (error) {
     console.error(error);
   }

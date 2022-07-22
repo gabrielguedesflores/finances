@@ -6,6 +6,11 @@ $(document).ready(function(){
 
 const binds = () => {
   //$("#labelValue").mask('R$ #.##0,00')
+  $("#labelvalue").maskMoney({
+    prefix: "R$ ",
+    decimal: ",",
+    thousands: "."
+  });
 }
 
 const calledMaterialize = () => {
