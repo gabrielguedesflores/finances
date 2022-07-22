@@ -24,6 +24,11 @@ const initLabel = async(userid) => {
           $(`input[name=categories_${label[i].labelid}]`)[index].checked = true
         }
       }
+      $(`#labelvalue${label[i].labelid}`).maskMoney({
+        prefix: "R$ ",
+        decimal: ",",
+        thousands: "."
+      });
     }
     $('#loadingLabel').hide()
 
@@ -211,7 +216,7 @@ const buildLabel = (label) => {
         <div class="chip ${labelpaidAux}  col s3" style="text-align: center;">Paga</div>
       </div>
       <div class="collapsible-body">
-        <span>R$ ${label.labelvalue}</span>
+        <span>${label.labelvalue}</span>
         <a class="waves-effect waves-light modal-trigger black-text" data-target="modal${label.labelid}" href="#modal${label.labelid}" style="float: right;"><i class="material-icons">create</i></a>
       </div>
     </li>`
