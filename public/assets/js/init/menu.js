@@ -16,7 +16,7 @@ const menu = `
           <div class="background">
             <img src="assets/images/capa.png">
           </div>
-          <a href="#!user"><img class="circle" src="assets/images/perfil.jpg"></a>
+          <a href="#!user"><img class="circle" src="assets/images/image-profile/1.jpg"></a>
           <a href="#!name"><span class="white-text name">Gabriel Guedes</span></a>
           <a href="#!email"><span class="white-text email">gabs@gmail.com</span></a>
         </div>

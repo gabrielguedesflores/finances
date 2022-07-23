@@ -47,7 +47,7 @@ const fillFields = (data) => {
   $('#username').val(data.username)
   $('#useremail').val(data.useremail)
   $('#userpassword').val(data.userpassword)
-  $('#userimage').val(data.userimage)
+  $('#userimage').append(`<img class="circle" src="${data.userimage}">`)
 }
 
 const saveUser = async() => {
