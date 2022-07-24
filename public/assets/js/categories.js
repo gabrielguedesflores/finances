@@ -94,7 +94,7 @@ const initCategories = async (userid) => {
     console.log(categories);
     for (let i = 0; i < categories.length; i++) {
       $('#tableCategories').find('tbody').append(buildCategories(categories[i]))
-      $('#main').append(buildMadaisCategories(categories[i]))
+      $('#main').append(buildModaisCategories(categories[i]))
       $(`#modal${categories[i].categoryid}`).modal()   
       //$(`#buttonDeleteCategory${categories[i].categoryid}`).on('click', handlerDeleteCategory(`${categories[i].categoryid}`))
     }
@@ -102,7 +102,6 @@ const initCategories = async (userid) => {
     $('#total').hide()
     $('#noCategories').show()
   }
-  
 }
 
 const buildCategories = (categories) => {
@@ -116,7 +115,7 @@ const buildCategories = (categories) => {
   </tr>`
 }
 
-const buildMadaisCategories = (categories) => {
+const buildModaisCategories = (categories) => {
   return `
   <div id="modal${categories.categoryid}" class="modal">
     <div class="modal-content">

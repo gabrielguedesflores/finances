@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meus ganhos</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/assets/css/home.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body id="body">
+    <div class="container" id="main">
+      <!-- Menu -->
+      <div id="menu" class="row" ></div>
+      <!-- /Menu -->
+
+      <div class="row" style="float: center; display: block;">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s10">
+              <input placeholder="Adicione um ganho..." id="addNewCategory" type="text" class="validate">
+              <label for="addNewEarning">Seus Ganhos</label>
+            </div>
+            <div class="input-field col s2">
+              <a class="btn-floating btn-large waves-effect waves-light red" id="buttonAddCategory"><i class="material-icons">add</i></a>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <section id="earning" class="col s12 m8 offset-m2 l6 offset-l3 centered" style="display: none;">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s12">
+              <table id="tableEarning" class="centered">
+                <thead>
+                  <tr>
+                      <th>Descrição</th>
+                      <th>Valor</th>
+                      <th>Ações</th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+                
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="noEarning" style="display: none">
+        <blockquote>
+          Você não tem ganhos cadastradas...
+        </blockquote>
+      </section>
+    </div>
+
+    <!-- Loading... -->
+    <div class="progress" id="spinnerInit" style="display: none;">
+      <div class="indeterminate"></div>
+    </div>
+
+    <!--Imports Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+    <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js" integrity="sha512-uplugzeh2/XrRr7RgSloGLHjFV0b4FqUtbT5t9Sa/XcilDr1M3+88u/c+mw6+HepH7M2C5EVmahySsyilVHI/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript" src="/assets/js/init/loading.js"></script>
+    <script type="text/javascript" src="/assets/js/init/menu.js"></script>
+
+    <script type="text/javascript" src="/assets/js/earning.js"></script>
+
+  </body>
+</html>

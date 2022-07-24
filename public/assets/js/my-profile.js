@@ -51,7 +51,6 @@ const fillFields = (data) => {
 }
 
 const saveUser = async() => {
-  console.log('chegou');
   const userid = $('#userid').val()
   const username = $('#username').val()
   const useremail = $('#useremail').val()
@@ -65,6 +64,8 @@ const saveUser = async() => {
     "userimage": userimage,
     "userid": userid
   }
-  await editUser(userEdit)
-  location.reload();
+
+  console.log(userEdit);
+  // await editUser(userEdit)
+  // location.reload();
 }

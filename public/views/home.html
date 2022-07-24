@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Home</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="/assets/css/home.css"/>
@@ -78,7 +79,7 @@
 
       </section>
 
-      <section id="total" class="col s12 m8 offset-m2 l6 offset-l3 centered" style="margin: 50px 50px 50px 50px;">
+      <section id="totalSection" class="col s12 m8 offset-m2 l6 offset-l3 centered" style="margin: 50px 50px 50px 50px;">
         <div class="card-panel grey lighten-5 z-depth-1">
           <div class="row valign-wrapper">
             <div class="col s12">
@@ -91,17 +92,15 @@
                 </thead>
         
                 <tbody>
-                  <tr>
+                  <tr id="ganhos">
                     <td>Ganhos</td>
-                    <td><b>R$ 0,00</b></td>
+                    
                   </tr>
-                  <tr>
+                  <tr id="gastos">
                     <td>Gastos</td>
-                    <td><b>R$ 0,00</b></td>
                   </tr>
-                  <tr>
+                  <tr id="total">
                     <td>Total</td>
-                    <td><b>R$ 0,00</b></td>
                   </tr>
                 </tbody>
               </table>
@@ -178,5 +177,7 @@
     <script type="text/javascript" src="/assets/js/init/footer.js"></script>
     <script type="text/javascript" src="/assets/js/createLabel.js"></script>
     <script type="text/javascript" src="/assets/js/home.js"></script>
+
+    <script type="text/javascript" src="/assets/js/init/total.js"></script>
   </body>
 </html>
