@@ -1,6 +1,12 @@
 $(document).ready(function(){
   initEarning(localStorage.getItem('userid'))
-  //$('#addNewEarning').on('click', controllerCreateCategory)
+  $('#buttonAddNewEarning').on('click', controllerCreateEarning)
+  
+  $("#earningvalueNew").maskMoney({
+    prefix: "R$ ",
+    decimal: ",",
+    thousands: "."
+  });
 });
 
 const url = `https://finance-control-fc-api.herokuapp.com/api`;
@@ -16,6 +22,27 @@ const getEarnings = async(userid) => {
   }
 }
 
+function toastNotifyError (message){
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+  toastr.error(message);
+}
+
 const initEarning = async (userid) => {
   const earning = await getEarnings(userid);
 
@@ -29,6 +56,11 @@ const initEarning = async (userid) => {
       $('#main').append(buildModaisEarning(earning[i]))
       $(`#modal${earning[i].earningid}`).modal()   
       //$(`#buttonDeleteCategory${categories[i].categoryid}`).on('click', handlerDeleteCategory(`${categories[i].categoryid}`))
+      $(`#earningvalue${earning[i].earningid}`).maskMoney({
+        prefix: "R$ ",
+        decimal: ",",
+        thousands: "."
+      });
     }
   }else{
     $('#earning').hide()
@@ -73,25 +105,26 @@ const buildModaisEarning = (earning) => {
   `
 }
 
-const handlerDeleteCategory = async(categoryid) => {
+const handlerDeleteEarning = async(earningid) => {
   try {
-    const { data } = await axios.post(url + '/category/delete', {
-      categoryid: categoryid
+    const { data } = await axios.post(url + '/earning/delete', {
+      earningid: earningid
     });
     location.reload();
     return data
   } catch (error) {
     console.error(error);
-    toastNotifyError("Existe despesa(s) vinculada a essa categoria.")
+    toastNotifyError("Erro ao excluir. Tente novamente mais tarde.")
   }
 }
 
-const handlerEditCategory = async(categoryid) => {
-  console.log('handlerEditCategory');
+const handlerEditEarning = async(earningid) => {
+  console.log('handlerEditEarning');
   try {
-    const { data } = await axios.post(url + '/category/edit', {
-      categorydesc: $(`#modal${categoryid}`).find('input')[0].value, 
-      categoryid: categoryid
+    const { data } = await axios.post(url + '/earning/edit', {
+      earningdesc: $(`#modal${earningid}`).find('input')[0].value, 
+      earningvalue: $(`#modal${earningid}`).find('input')[1].value,
+      earningid: earningid
     });
     location.reload();
     return data
@@ -100,21 +133,35 @@ const handlerEditCategory = async(categoryid) => {
   }
 }
 
-const controllerCreateCategory = async() => {
-  console.log('controllerCreateCategory');
-  if($('#addNewCategory')[0].value !== ''){
+const controllerCreateEarning = async() => {
+  console.log('controllerCreateEarning');
+  if($('#earningvalueNew')[0].value !== '' && $('#earningdescNew')[0].value !== ''){
     try {
-      const newCategory = {
-        categorydesc: $('#addNewCategory')[0].value,
-        categorycolor: "'",
+      const newEarning = {
+        earningvalue: $('#earningvalueNew')[0].value,
+        earningdesc: $('#earningdescNew')[0].value,
         userid: localStorage.getItem('userid')
       }
-      await createCategory(newCategory)
-      console.log(newCategory)
+      console.log(newEarning)
+      await createEarning(newEarning)
       return true
     } catch (error) {
       console.error(error)
     }
+  }else{
+    toastNotifyError('<b>Valor</b> e <b>Descrição</b> são obrigatórios')
   }
-  toastNotifyError('Campo <b>Categoria</b> obrigatório')
+  
+}
+
+const createEarning = async(newEarning) => {
+  try {
+    const { data } = await axios.post(url + '/earning/create', newEarning);
+    location.reload();
+    return data
+  } catch (error) {
+    console.error(error);
+    toastNotifyError("Erro ao criar. Tente novamente mais tarde.")
+    return false
+  }
 }
