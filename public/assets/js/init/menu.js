@@ -35,13 +35,9 @@ const menu = `
       <i class="medium material-icons">menu</i>
     </a>
   </div>
-  <div class="input-field col s10">
-    <select>
-      <option value="" selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
+  <div class="input-field col s9">
+    <select id="selectFilter" name="selectFilter">
+      <option value="" selected>Filtrar despesas por categorias...</option>
     </select>
-    <label>Materialize Select</label>
   </div>
   `

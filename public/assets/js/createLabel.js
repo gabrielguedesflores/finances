@@ -30,6 +30,7 @@ const initLabel = async(userid) => {
         thousands: "."
       });
     }
+    renderSelectFilter(category)
     $('#loadingLabel').hide()
 
   } catch (error) {
@@ -210,6 +211,7 @@ const buildLabel = (label) => {
     <li>
       <div style="display: none;" id="hidden">
         <input type="text" id="labelid" value="${label.labelid}">
+        <input type="text" id="categoryid" value="${label.categoryid}">
       </div>
       <div class="collapsible-header">
         ${label.labeltitle}
@@ -377,5 +379,15 @@ const categoriesInit = async (userid) => {
         Você não tem categorias cadastradas... <a href="/categorias">Criar</a>
       </blockquote>
     `)
+  }
+}
+
+const renderSelectFilter = (category) => {
+  if(category){
+    for (let i = 0; i < category.length; i++) {
+      $('select').append(`<option value="${category[i].categoryid}">${category[i].categorydesc}</option>`)
+    }
+    $('select').append(`<option value="isAll">Todas</option>`)
+    $('select').material_select();
   }
 }

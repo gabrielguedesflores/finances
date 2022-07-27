@@ -42,7 +42,7 @@ const fillFieldsTotals = (spendings, earnings) => {
   $('#gastos').append(`<td><b>R$ ${spendings}</b></td>`)
   const total = spendings > earnings ? (spendings - earnings) : (earnings - spendings) 
   console.log('total: ' + total);
-  $('#total').append(`<td><b>R$ ${total}</b></td>`)
+  $('#total').append(`<td><b>R$ ${total.toFixed(2)}</b></td>`)
 }
 
 const renderTotals = async(userid) => {
