@@ -6,6 +6,10 @@ viewsRouter.get("/", function (_, res) {
   res.sendFile(path.resolve('./public/views/home.html'));
 });
 
+viewsRouter.get("/login", function (_, res) {
+  res.sendFile(path.resolve('./public/views/login.html'));
+});
+
 viewsRouter.get("/meu-perfil", function (_, res) {
   res.sendFile(path.resolve('./public/views/my-profile.html'));
 });
@@ -29,7 +33,6 @@ viewsRouter.get("/configuracoes", function (_, res) {
 viewsRouter.get("/sair", function (_, res) {
   res.sendFile(path.resolve('./public/views/sign-out.html'));
 });
-
 
 /*   */
 

@@ -1,7 +1,12 @@
 $(document).ready(function(){
   console.log('loading.js');
-  login()
-  loading()
+  if(localStorage.getItem('userid')){
+    loading()
+    return true
+  }else{
+    window.location.replace("/login");
+    return false
+  }
 });
 
 const loading = () => {
@@ -14,8 +19,4 @@ const loading = () => {
     $('#main').show()
     $('#footer').show()
   }, 1000)
-}
-
-const login = () => {
-  localStorage.setItem('userid', '1')
 }
