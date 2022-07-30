@@ -1,37 +1,36 @@
 $(document).ready(function() {
+  localStorage.removeItem('userid')
   $('#btnLogin').on('click', controllerLogin)
   $('#btnCreateUser').on('click', controllerCreateUser)
   calledMaterialize()
-  localStorage.removeItem('userid')
 })
 
 const url = `https://finance-control-fc-api.herokuapp.com/api`
 
-const createUser = async(data) => {
+const createUser = async(user) => {
   try {
-    const { insert } = await axios.post(url + '/user/create', {
-      username: data.username,
-      useremail: data.useremail, 
-      userpassword: data.userpassword,
+    const { data } = await axios.post(url + '/user/create', {
+      username: user.username,
+      useremail: user.useremail, 
+      userpassword: user.userpassword,
     });
-    console.log(insert);
-    return true
+    return data
   } catch (error) {
     console.error(error);
     return false;
   }
 }
 
-const loginUser = async(data) => {
+const loginUser = async(user) => {
   try {
-    const { user } = await axios.post(url + '/user/login', {
-      useremail: data.useremail, 
-      userpassword: data.userpassword,
+    const { data } = await axios.post(url + '/user/login', {
+      useremail: user.useremail, 
+      userpassword: user.userpassword,
     });
-    console.log(user);
-    return user
+    return data
   } catch (error) {
     console.error(error);
+    toastNotifyError('Usuário não encontrado!')
     return false;
   }
 }
@@ -53,7 +52,9 @@ const controllerLogin = async() => {
     toastNotifyError('Campo <b>Senha</b> é obrigatório')
   }
 
-  console.log(newLogin);
+  const data = await loginUser(newLogin)
+  localStorage.setItem('userid', data[0].userid)
+  window.location.replace("/");
 }
 
 const controllerCreateUser = async () => {
@@ -81,20 +82,11 @@ const controllerCreateUser = async () => {
     useremail: useremail, 
     userpassword: userpassword,
   }
-
-  const loginUser = {
-    useremail: useremail, 
-    userpassword: userpassword,
-  }
   
-  try {
-    await createUser(newUser);
-    const data = await loginUser(loginUser)
-    console.log(data);
-    localStorage.setItem('userid', user.userid)
-  } catch (error) {
-    console.error(error)
-  }
+
+  const data = await createUser(newUser)
+  localStorage.setItem('userid', data[0].userid)
+  window.location.replace("/");
 }
 
 function toastNotifyError (message){
