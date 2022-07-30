@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  console.log('footer.js')
   $('#footer').append(footer)
 
   $('#btnLayoutGrid').on('click', () => {

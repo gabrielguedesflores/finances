@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  console.log('loading.js');
   if(localStorage.getItem('userid')){
     loading()
     return true

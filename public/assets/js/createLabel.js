@@ -13,7 +13,6 @@ const initLabel = async(userid) => {
   try {
     const label = await getLabel(userid)
     const category = await getCategory(userid)
-    console.log("total de labels encontrada: " + label.length);
     for (let i = 0; i < label.length; i++) {
       $('.collapsible').append(buildLabel(label[i]))
       $('#main').append(await buildModal(label[i]))
@@ -77,7 +76,6 @@ const controllerCreateLabel = async() => {
 		"userid": userid,
     "categoryid": categoryid
 	}
-  console.log(newLabel);
   if(categoryid){
     await createLabel(newLabel)
     location.reload();
@@ -151,7 +149,6 @@ const createLabel = async(data) => {
       userid: data.userid,
       categoryid: data.categoryid,
     });
-    console.log(insert);
     return true
   } catch (error) {
     console.error(error);
@@ -296,7 +293,6 @@ const returnCategoryModal = (labelid) => {
       category = $(`input[name=categories_${labelid}]`)[i].id;
     }
   }
-  console.log(category);
   if(category == undefined){
     toastNotifyError('O campo <b>Categorias</b> é obrigatório. Caso você não possua nenhuma cadastrada, vá até o menu Categorias!')
     return false;

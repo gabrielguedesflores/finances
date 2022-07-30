@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  console.log('total.js');
   renderTotals(localStorage.getItem('userid'))
 });
 
@@ -41,7 +40,6 @@ const fillFieldsTotals = (spendings, earnings) => {
   $('#ganhos').append(`<td><b>R$ ${earnings}</b></td>`)
   $('#gastos').append(`<td><b>R$ ${spendings}</b></td>`)
   const total = spendings > earnings ? (spendings - earnings) : (earnings - spendings) 
-  console.log('total: ' + total);
   $('#total').append(`<td><b>R$ ${total.toFixed(2)}</b></td>`)
 }
 
@@ -49,9 +47,6 @@ const renderTotals = async(userid) => {
   try {
     const spendings = await getSpending(userid);
     const earnings = await getEarnings(userid);
-
-    console.log('spending: ' + spendings);
-    console.log('earnings: ' + earnings);
     fillFieldsTotals(spendings, earnings)
     return true
   } catch (error) {
