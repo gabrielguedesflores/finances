@@ -47,9 +47,9 @@ const buildMenu = (user) => {
       <li><a href="/meu-perfil" class="waves-effect"><i class="material-icons">person</i>Meu perfil</a></li>
       <li><a href="/categorias" class="waves-effect"><i class="material-icons">burst_mode</i>Categorias</a></li>
       <li><a href="/meus-ganhos" class="waves-effect"><i class="material-icons">attach_money</i>Meus Ganhos</a></li>
-      <li><a href="/personalizar" class="waves-effect"><i class="material-icons">color_lens</i>Personalizar</a></li>
+      
       <li><div class="divider"></div></li>
-      <li><a href="/configuracoes" class="waves-effect"><i class="material-icons">settings</i>Configurações</a></li>
+      
       <li><a href="/sair" class="waves-effect"><i class="material-icons">input</i>Sair</a></li>
     </ul>
     <a href="#" data-activates="slide-out" class="btn-floating btn-large waves-effect waves-light red button-collapse">
