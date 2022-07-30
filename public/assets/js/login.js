@@ -13,6 +13,7 @@ const createUser = async(user) => {
       username: user.username,
       useremail: user.useremail, 
       userpassword: user.userpassword,
+      userimage: user.userimage,
     });
     return data
   } catch (error) {
@@ -61,6 +62,7 @@ const controllerCreateUser = async () => {
   const username = $('#username').val()
   const useremail = $('#useremail').val()
   const userpassword = $('#userpassword').val()
+  const userimage = $('#userimage')
 
   if(!username) {
     toastNotifyError('Campo <b>Nome</b> é obrigatório')
@@ -77,16 +79,21 @@ const controllerCreateUser = async () => {
     return false
   }
 
-  const newUser = {
-    username: username,
-    useremail: useremail, 
-    userpassword: userpassword,
-  }
+  const reader = new FileReader();
+  reader.readAsDataURL(userimage[0].files[0]);
+  reader.onload = async function () {
+    const newUser = {
+      username: username,
+      useremail: useremail, 
+      userpassword: userpassword,
+      userimage: reader.result
+    }
+    console.log(newUser);
+    const data = await createUser(newUser)
+    localStorage.setItem('userid', data[0].userid)
+    window.location.replace("/");
+  };
   
-
-  const data = await createUser(newUser)
-  localStorage.setItem('userid', data[0].userid)
-  window.location.replace("/");
 }
 
 function toastNotifyError (message){

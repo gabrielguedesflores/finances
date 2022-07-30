@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  console.log('menu.js');
   controllerMenu(localStorage.getItem('userid'))
 });
 
@@ -30,7 +29,6 @@ const controllerMenu = async(userid) => {
 }
 
 const buildMenu = (user) => {
-  console.log(user);
   return `
   <div class="col s2">
     <!-- Sidenav -->
