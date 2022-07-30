@@ -63,7 +63,7 @@ const controllerCreateUser = async () => {
   const username = $('#username').val()
   const useremail = $('#useremail').val()
   const userpassword = $('#userpassword').val()
-  const userimage = $('#userimage')
+  let userimage = $('#userimage')
 
   if(!username) {
     toastNotifyError('Campo <b>Nome</b> é obrigatório')
@@ -83,17 +83,18 @@ const controllerCreateUser = async () => {
   const reader = new FileReader();
   reader.readAsDataURL(userimage[0].files[0]);
   reader.onload = async function () {
-    const newUser = {
-      username: username,
-      useremail: useremail, 
-      userpassword: userpassword,
-      userimage: reader.result
-    }
-    console.log(newUser);
-    const data = await createUser(newUser)
-    localStorage.setItem('userid', data[0].userid)
-    window.location.replace("/");
+    userimage = reader.result
   };
+  const newUser = {
+    username: username,
+    useremail: useremail, 
+    userpassword: userpassword,
+    userimage: userimage
+  }
+  console.log(newUser);
+  const data = await createUser(newUser)
+  localStorage.setItem('userid', data[0].userid)
+  window.location.replace("/");
   
 }
 
