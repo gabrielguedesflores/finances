@@ -23,7 +23,7 @@ const calledMaterialize = () => {
 
 const handlersHome = () => {
   $('#createLabelPaid').on('click', handlePaid)
-  $('select').on('change', handleFilterChange)
+  $('#select').on('change', handleFilterChange)
 }
 
 const handlePaid = () => {
@@ -55,6 +55,6 @@ const handleFilterChange = (e) => {
     }else{
       list.eq(i).show('slow')
     }
-    
   }
+  $('select').material_select();
 }

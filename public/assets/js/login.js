@@ -59,6 +59,7 @@ const controllerLogin = async() => {
 }
 
 const controllerCreateUser = async () => {
+  console.log('controllerCreateUser');
   const username = $('#username').val()
   const useremail = $('#useremail').val()
   const userpassword = $('#userpassword').val()
